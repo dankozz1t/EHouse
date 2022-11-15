@@ -15,7 +15,6 @@ export default {
     type: {
       type: String,
       default: "button",
-      required: true,
     },
     variant: {
       type: String,
