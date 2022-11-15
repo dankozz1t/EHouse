@@ -1,0 +1,37 @@
+:root {
+  // Fonts
+  --main-font: "Montserrat", sans-serif;
+
+  // Text colors
+  --main-text-cl: #000000;
+  --secondary-text-cl: #ffffff;
+
+  // Background colors
+  --main-bg-cl: #e5e5e5;
+  --secondary-bg-cl: #0f1d2d;
+
+  --main-accent-cl: #ff662d;
+  --main-dark-accent-cl: #f55e27;
+  --main-light-accent-cl: #fc7341;
+
+  // Transition
+  --transition-cubic: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-time: 250ms;
+
+  //Buttons
+  --btn-primary-text-color: #ffffff;
+  --btn-primary-bg-color: #ff662d;
+  --btn-primary-dark-bg-color: #f55e27;
+  --btn-primary-light-bg-color: #fc7341;
+
+  --btn-secondary-text-color: #ff662d;
+  --btn-secondary-bg-color: #ffffff;
+  --btn-secondary-dark-bg-color: #ffe9e9;
+  --btn-secondary-light-bg-color: #ffdbdb;
+
+  // Message
+  --success-cl: #74b566;
+  --info-cl: #76bedb;
+  --warning-cl: #e6af5f;
+  --error-cl: #c95c54;
+}
