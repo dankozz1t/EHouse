@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <b-container>
-      <ApartmentsList :items="apartments">
+      <ApartmentsFilterForm @submit="filter" />
+
+      <h2 v-if="!filteredApartments.length">Sorry, Nothing found</h2>
+      <ApartmentsList v-else :items="filteredApartments">
         <template v-slot:title> <h2>List Apartments</h2> </template>
       </ApartmentsList>
 
@@ -12,18 +15,57 @@
 </template>
 
 <script>
-import MyButton from "./components/MyButton.vue";
+import MyButton from "./components/shared/MyButton.vue";
 import apartments from "./components/apartment/apartments";
 import ApartmentsList from "./components/apartment/ApartmentsList.vue";
+import ApartmentsFilterForm from "./components/apartment/ApartmentsFilterForm.vue";
 
 export default {
   name: "App",
   data() {
     return {
       apartments,
+      filters: {
+        city: "",
+        price: 0,
+      },
     };
   },
-  components: { MyButton, ApartmentsList },
+  components: {
+    MyButton,
+    ApartmentsList,
+
+    ApartmentsFilterForm,
+  },
+  computed: {
+    filteredApartments() {
+      return this.filterByCity(this.filterByPrice(this.apartments));
+    },
+  },
+  methods: {
+    filter({ city, price }) {
+      this.filters.city = city;
+      this.filters.price = price;
+    },
+    filterByCity(apartments) {
+      if (!this.filters.city) {
+        return apartments;
+      }
+
+      return apartments.filter(
+        (apartment) => apartment.location.city === this.filters.city
+      );
+    },
+    filterByPrice(apartments) {
+      if (!this.filters.price) {
+        return apartments;
+      }
+
+      return apartments.filter(
+        (apartment) => apartment.price >= this.filters.price
+      );
+    },
+  },
 };
 </script>
 
