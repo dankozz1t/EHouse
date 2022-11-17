@@ -13,6 +13,7 @@
         :rating="rating"
         :price="price"
         :imgUrl="imgUrl"
+        :id="id"
       />
     </b-col>
   </b-row>

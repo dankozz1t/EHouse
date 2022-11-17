@@ -6,7 +6,10 @@
           <TheLogo />
         </b-col>
         <b-col>
-          <span>base navigation (in process)</span>
+          <nav>
+            <router-link :to="{ name: 'home' }">Home</router-link> |
+            <router-link :to="{ name: 'about' }">About</router-link>
+          </nav>
         </b-col>
       </b-row>
     </b-container>
@@ -30,5 +33,13 @@ export default {
 
   color: var(--secondary-text-cl);
   background-color: var(--secondary-bg-cl);
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>

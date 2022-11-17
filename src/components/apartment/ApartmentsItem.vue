@@ -10,6 +10,9 @@
           <StarRating :rating="rating" :starLimit="5" />
         </div>
         <div class="apartments-item__price">UAH {{ price }}</div>
+        <router-link :to="{ name: 'apartment', params: { id } }"
+          >Show more</router-link
+        >
       </div>
     </div>
   </div>
@@ -21,6 +24,10 @@ import StarRating from "../StarRating.vue";
 export default {
   name: "ApartmentsItem",
   props: {
+    id: {
+      type: String,
+      required: true,
+    },
     description: {
       type: String,
       default: "",
