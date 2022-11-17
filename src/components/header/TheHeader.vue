@@ -3,7 +3,7 @@
     <b-container>
       <b-row>
         <b-col>
-          <TheLogo />
+          <router-link :to="{ name: 'home' }"><TheLogo /> </router-link>
         </b-col>
         <b-col>
           <nav>

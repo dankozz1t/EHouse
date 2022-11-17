@@ -1,9 +1,9 @@
 <template>
-  <div class="reviews-heading">
-    <Avatar class="reviews-heading__avatar" />
-    <div class="reviews-heading__content">
-      <span class="reviews-heading__author">{{ author }}</span>
-      <StarRating :rating="rating" />
+  <div class="reviews-header">
+    <Avatar class="reviews-header__avatar" />
+    <div class="reviews-header__content">
+      <span class="reviews-header__author">{{ author }}</span>
+      <StarRating v-if="rating" :rating="rating" />
     </div>
   </div>
 </template>
@@ -13,7 +13,7 @@ import StarRating from "../StarRating.vue";
 
 import Avatar from "./ReviewsAvatar";
 export default {
-  name: "ReviewsHeading",
+  name: "ReviewsHeader",
   components: {
     StarRating,
     Avatar,
@@ -32,15 +32,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.reviews-heading {
+.reviews-header {
   display: flex;
   align-items: center;
 }
 
-.reviews-heading__avatar {
+.reviews-header__avatar {
   margin-right: 18px;
 }
-.reviews-heading__content {
+.reviews-header__content {
   display: flex;
   flex-direction: column;
 }

@@ -1,6 +1,6 @@
 <template>
   <article class="apartment-info">
-    <div class="apartment-info__heading">
+    <div class="apartment-info__header">
       <h1 class="apartment-info__title">{{ apartment.title }}</h1>
       <Rating :rating="apartment.rating" />
     </div>
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.apartment-info__heading {
+.apartment-info__header {
   display: flex;
 }
 

@@ -3,16 +3,19 @@
     <div class="apartments-item__inner">
       <img :src="imgUrl" alt="" class="apartments-item__photo" />
       <div class="apartments-item__content">
-        <p class="apartments-item__descr">
-          {{ descr }}
-        </p>
-        <div class="apartments-item__rating">
-          <StarRating :rating="rating" :starLimit="5" />
-        </div>
-        <div class="apartments-item__price">UAH {{ price }}</div>
-        <router-link :to="{ name: 'apartment', params: { id } }"
-          >Show more</router-link
+        <router-link
+          :to="{ name: 'apartment', params: { id } }"
+          class="apartments-item__link"
         >
+          <p class="apartments-item__descr">
+            {{ descr }}
+          </p>
+          <div class="apartments-item__rating">
+            <StarRating :rating="rating" :starLimit="5" />
+          </div>
+          <div class="apartments-item__price">UAH {{ price }}</div>
+          <span>Click to see more</span>
+        </router-link>
       </div>
     </div>
   </div>
@@ -77,6 +80,12 @@ export default {
 
   &:hover {
     opacity: 1;
+  }
+}
+
+.apartments-item__link {
+  &:hover {
+    color: inherit;
   }
 }
 

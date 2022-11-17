@@ -1,6 +1,7 @@
 <template>
   <b-container>
-    <b-row>
+    <p v-if="!apartment">Loading...</p>
+    <b-row v-else>
       <b-col cols="12" lg="8"><ApartmentsInfo :apartment="apartment" /> </b-col>
       <b-col cols="12" lg="4">
         <b-row>
@@ -21,18 +22,27 @@
 import ApartmentsInfo from "@/components/apartment/ApartmentsInfo.vue";
 import ApartmentsOwner from "@/components/apartment/ApartmentsOwner.vue";
 import ReviewsList from "@/components/reviews/ReviewsList.vue";
-import apartments from "@/components/apartment/apartments";
-import reviews from "../components/reviews/reviews";
+import {
+  getApartmentById,
+  getReviewsApartmentById,
+} from "@/services/apartments.service";
 
 export default {
   components: { ApartmentsInfo, ApartmentsOwner, ReviewsList },
-  computed: {
-    apartment() {
-      return apartments.find(({ id }) => id === this.$route.params.id);
-    },
-    reviews() {
-      return reviews;
-    },
+  data() {
+    return { apartment: null, reviews: null };
+  },
+
+  async created() {
+    try {
+      const apartment = await getApartmentById(this.$route.params.id);
+      const reviews = await getReviewsApartmentById(this.$route.params.id);
+
+      this.apartment = apartment.data;
+      this.reviews = reviews.data;
+    } catch (error) {
+      console.log(error.message);
+    }
   },
 };
 </script>

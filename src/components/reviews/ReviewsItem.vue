@@ -1,16 +1,16 @@
 <template>
   <div class="reviews-item">
-    <ReviewsHeading :rating="review.rating" :author="review.author" />
+    <ReviewsHeader :rating="review.rating" :author="review.author" />
     <p class="reviews-item__content">{{ review.content }}</p>
   </div>
 </template>
 
 <script>
-import ReviewsHeading from "./ReviewsHeading";
+import ReviewsHeader from "./ReviewsHeader";
 export default {
   name: "ReviewsItem",
   components: {
-    ReviewsHeading,
+    ReviewsHeader,
   },
   props: {
     review: {
@@ -36,6 +36,7 @@ export default {
 }
 
 .reviews-item__content {
+  text-align: start;
   display: -webkit-box;
   margin-top: 20px;
   overflow: hidden;

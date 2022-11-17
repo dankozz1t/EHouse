@@ -1,22 +1,26 @@
 <template>
   <section class="reviews">
-    <div class="reviews__heading">
-      <h2 class="reviews__title">Overall rating</h2>
+    <div class="reviews__header">
+      <h2 class="reviews__title">Comments</h2>
       <div class="reviews__rating">
         <span>{{ amountOfReviews }} review(s) </span>
-        <StarRating :rating="totalRating" />
+        <StarRating v-if="totalRating" :rating="totalRating" />
       </div>
     </div>
 
     <transition-group name="reviews--animation">
       <ReviewsItem
         v-for="review in currentReviews"
-        :key="review.author"
+        :key="review.id"
         :review="review"
       />
     </transition-group>
 
-    <button @click="toggleReviews" class="reviews__show-more">
+    <button
+      v-if="reviews.length > reviewsLimit || buttonText === 'Less'"
+      @click="toggleReviews"
+      class="reviews__show-more"
+    >
       {{ buttonText }}
     </button>
   </section>
@@ -58,7 +62,7 @@ export default {
     },
     buttonText() {
       return this.reviewsLimit === this.reviews.length
-        ? "less"
+        ? "Less"
         : "Read more...";
     },
   },
@@ -80,7 +84,7 @@ export default {
   background-color: var(--secondary-accent-cl);
   padding: 0 2px;
 }
-.reviews__heading {
+.reviews__header {
   padding: 20px 20px 10px;
 }
 .reviews__title {

@@ -14,14 +14,15 @@
 
 <script>
 import MyButton from "@/components/shared/MyButton.vue";
-import apartments from "@/components/apartment/apartments";
 import ApartmentsList from "@/components/apartment/ApartmentsList.vue";
 import ApartmentsFilterForm from "@/components/apartment/ApartmentsFilterForm.vue";
+
+import { getApartmentsList } from "@/services/apartments.service";
 
 export default {
   name: "HomeView",
   data() {
-    return { apartments, filters: { city: "", price: 0 } };
+    return { apartments: [], filters: { city: "", price: 0 } };
   },
 
   components: {
@@ -29,11 +30,22 @@ export default {
     ApartmentsList,
     ApartmentsFilterForm,
   },
+
   computed: {
     filteredApartments() {
       return this.filterByCity(this.filterByPrice(this.apartments));
     },
   },
+
+  async created() {
+    try {
+      const { data } = await getApartmentsList();
+      this.apartments = data;
+    } catch (error) {
+      console.log(error.message);
+    }
+  },
+
   methods: {
     filter({ city, price }) {
       this.filters.city = city;
