@@ -31,7 +31,7 @@ export default {
   font-weight: 400;
   text-align: start;
 
-  background-color: lightblue;
+  background-color: var(--secondary-accent-cl);
 }
 
 .apartments-owner__title {

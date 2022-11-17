@@ -4,8 +4,12 @@
       <h1 class="apartment-info__title">{{ apartment.title }}</h1>
       <Rating :rating="apartment.rating" />
     </div>
-    <img :src="apartment.imgUrl" alt="" class="apartment-info__photo" />
-    <p class="apartment-info__description">{{ apartment.description }}</p>
+    <img
+      :src="apartment.imgUrl"
+      :alt="apartment.title"
+      class="apartment-info__photo"
+    />
+    <p class="apartment-info__descr">{{ apartment.descr }}</p>
     <div class="apartment-info__btn">
       <MyButton variant="primary"> Забронировать </MyButton>
     </div>
@@ -45,10 +49,11 @@ export default {
 }
 
 .apartment-info__photo {
-  max-width: 100%;
+  width: 100%;
+  max-width: 710px;
 }
 
-.apartment-info__description {
+.apartment-info__descr {
   line-height: 1.3;
   margin-top: 30px;
 }

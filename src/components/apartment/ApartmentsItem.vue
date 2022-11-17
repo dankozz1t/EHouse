@@ -3,8 +3,8 @@
     <div class="apartments-item__inner">
       <img :src="imgUrl" alt="" class="apartments-item__photo" />
       <div class="apartments-item__content">
-        <p class="apartments-item__description">
-          {{ description }}
+        <p class="apartments-item__descr">
+          {{ descr }}
         </p>
         <div class="apartments-item__rating">
           <StarRating :rating="rating" :starLimit="5" />
@@ -28,7 +28,7 @@ export default {
       type: String,
       required: true,
     },
-    description: {
+    descr: {
       type: String,
       default: "",
     },
@@ -67,7 +67,7 @@ export default {
   text-align: left;
   line-height: 1.4;
 
-  color: #ffffff;
+  color: var(--secondary-text-cl);
   background-color: rgba(#0f1d2d, 0.7);
 
   opacity: 0;
@@ -80,7 +80,7 @@ export default {
   }
 }
 
-.apartments-item__description {
+.apartments-item__descr {
   margin-bottom: 20px;
   max-height: calc(1em * 1.4 * 3);
   overflow: hidden;
@@ -101,6 +101,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
+
   object-fit: cover;
 }
 </style>

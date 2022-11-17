@@ -77,7 +77,7 @@ export default {
 <style lang="scss" scoped>
 .reviews {
   margin-top: 20px;
-  background-color: lightblue;
+  background-color: var(--secondary-accent-cl);
   padding: 0 2px;
 }
 .reviews__heading {

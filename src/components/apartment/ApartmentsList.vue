@@ -5,11 +5,11 @@
       cols="12"
       md="6"
       lg="4"
-      v-for="{ id, description, rating, price, imgUrl } in items"
+      v-for="{ id, descr, rating, price, imgUrl } in items"
       :key="id"
     >
       <ApartmentsItem
-        :description="description"
+        :descr="descr"
         :rating="rating"
         :price="price"
         :imgUrl="imgUrl"

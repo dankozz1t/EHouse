@@ -1,10 +1,18 @@
 <template>
   <form class="form" @submit.prevent="handleSubmit">
-    <MySelect :items="cities" v-model="city" class="form__select" />
-    <MyInput v-model="price" placeholder="Price from" />
-    <MyButton class="form__submit" type="submit" variant="primary">
-      Housing selection
-    </MyButton>
+    <b-row>
+      <b-col cols="12" lg="4"
+        ><MySelect :items="cities" v-model="city" class="form__select" />
+      </b-col>
+      <b-col cols="12" lg="4"
+        ><MyInput v-model="price" placeholder="Price from" />
+      </b-col>
+      <b-col cols="12" lg="4">
+        <MyButton class="form__submit" type="submit" variant="primary">
+          Housing selection
+        </MyButton>
+      </b-col>
+    </b-row>
   </form>
 </template>
 
@@ -53,16 +61,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.form {
-  display: flex;
-
-  &__select {
-    margin-right: 30px;
-  }
-
-  &__submit {
-    margin-left: auto;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

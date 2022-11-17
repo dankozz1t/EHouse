@@ -1,14 +1,14 @@
 <template>
   <b-container>
     <b-row>
-      <b-col cols="8"><ApartmentsInfo :apartment="apartment" /> </b-col>
-      <b-col cols="4">
+      <b-col cols="12" lg="8"><ApartmentsInfo :apartment="apartment" /> </b-col>
+      <b-col cols="12" lg="4">
         <b-row>
-          <b-col>
+          <b-col cols="12">
             <ApartmentsOwner :owner="apartment.owner" />
           </b-col>
 
-          <b-col>
+          <b-col cols="12">
             <ReviewsList :reviews="reviews" />
           </b-col>
         </b-row>
