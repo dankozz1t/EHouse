@@ -8,7 +8,11 @@
         <b-col>
           <nav>
             <router-link :to="{ name: 'home' }">Home</router-link> |
-            <router-link :to="{ name: 'about' }">About</router-link>
+            <router-link :to="{ name: 'about' }">About</router-link> |
+            <router-link :to="{ name: 'login' }">Login</router-link> |
+            <router-link :to="{ name: 'registration' }">
+              Registration
+            </router-link>
           </nav>
         </b-col>
       </b-row>

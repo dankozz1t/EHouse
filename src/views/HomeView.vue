@@ -1,15 +1,17 @@
 <template>
-  <b-container>
-    <ApartmentsFilterForm @submit="filter" />
+  <main class="main">
+    <b-container>
+      <ApartmentsFilterForm @submit="filter" />
 
-    <h2 v-if="!filteredApartments.length">Sorry, Nothing found</h2>
-    <ApartmentsList v-else :items="filteredApartments">
-      <template v-slot:title> <h2>List Apartments</h2> </template>
-    </ApartmentsList>
+      <h2 v-if="!filteredApartments.length">Sorry, Nothing found</h2>
+      <ApartmentsList v-else :items="filteredApartments">
+        <template v-slot:title> <h2>List Apartments</h2> </template>
+      </ApartmentsList>
 
-    <MyButton variant="primary">Button primary </MyButton>
-    <MyButton variant="secondary">Button secondary </MyButton>
-  </b-container>
+      <MyButton variant="primary">Button primary </MyButton>
+      <MyButton variant="secondary">Button secondary </MyButton>
+    </b-container>
+  </main>
 </template>
 
 <script>
@@ -72,3 +74,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.main {
+  margin: 60px 0;
+}
+</style>

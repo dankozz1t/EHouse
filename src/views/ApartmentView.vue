@@ -1,21 +1,25 @@
 <template>
-  <b-container>
-    <p v-if="!apartment">Loading...</p>
-    <b-row v-else>
-      <b-col cols="12" lg="8"><ApartmentsInfo :apartment="apartment" /> </b-col>
-      <b-col cols="12" lg="4">
-        <b-row>
-          <b-col cols="12">
-            <ApartmentsOwner :owner="apartment.owner" />
-          </b-col>
+  <main class="main">
+    <b-container>
+      <p v-if="!apartment">Loading...</p>
+      <b-row v-else>
+        <b-col cols="12" lg="8"
+          ><ApartmentsInfo :apartment="apartment" />
+        </b-col>
+        <b-col cols="12" lg="4">
+          <b-row>
+            <b-col cols="12">
+              <ApartmentsOwner :owner="apartment.owner" />
+            </b-col>
 
-          <b-col cols="12">
-            <ReviewsList :reviews="reviews" />
-          </b-col>
-        </b-row>
-      </b-col>
-    </b-row>
-  </b-container>
+            <b-col cols="12">
+              <ReviewsList :reviews="reviews" />
+            </b-col>
+          </b-row>
+        </b-col>
+      </b-row>
+    </b-container>
+  </main>
 </template>
 
 <script>
@@ -47,4 +51,8 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.main {
+  margin: 60px 0;
+}
+</style>

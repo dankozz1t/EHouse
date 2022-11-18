@@ -24,6 +24,23 @@ const routes = [
     component: () => import("../views/ApartmentView.vue"),
   },
   {
+    path: "/login",
+    name: "login",
+
+    component: () => import("../views/LoginView.vue"),
+    meta: {
+      hideForAuth: true,
+    },
+  },
+  {
+    path: "/registration",
+    name: "registration",
+    component: () => import("../views/RegistrationView.vue"),
+    meta: {
+      hideForAuth: true,
+    },
+  },
+  {
     path: "*",
     name: "not-found",
 
