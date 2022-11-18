@@ -1,13 +1,13 @@
-import axios from "@/utils/axios";
+import { axiosInstance } from "@/utils/http";
 
 export const getApartmentsList = () => {
-  return axios.get("/apartments");
+  return axiosInstance.get("/apartments");
 };
 
 export const getApartmentById = (id) => {
-  return axios.get(`/apartments/${id}`);
+  return axiosInstance.get(`/apartments/${id}`);
 };
 
 export const getReviewsApartmentById = (id) => {
-  return axios.get(`/apartments/${id}/reviews`);
+  return axiosInstance.get(`/apartments/${id}/reviews`);
 };

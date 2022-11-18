@@ -40,6 +40,7 @@ import {
   isRequired,
 } from "@/utils/validationRules";
 import { loginUser } from "@/services/auth.service";
+import { axiosToken } from "@/utils/http";
 
 export default {
   name: "LoginForm",
@@ -79,7 +80,17 @@ export default {
         try {
           this.loading = true;
           const { data } = await loginUser(this.formData);
-          console.log(data);
+          const { user, token } = data;
+
+          axiosToken.set(token);
+          this.$store.commit("setUser", user);
+          this.$store.commit("setToken", token);
+
+          this.$notify({
+            type: "success",
+            title: "Success!",
+            text: `Hello ${this.$store.state.user.name}!`,
+          });
         } catch (error) {
           this.$notify({ type: "error", title: "Error!", text: error.message });
         } finally {

@@ -57,6 +57,7 @@ import {
   isRequired,
 } from "@/utils/validationRules";
 import { registerUser } from "@/services/auth.service";
+import { axiosToken } from "@/utils/http";
 
 export default {
   name: "RegistrationForm",
@@ -111,7 +112,17 @@ export default {
         try {
           this.loading = true;
           const { data } = await registerUser({ name, password, email });
-          console.log(data);
+          const { user, token } = data;
+
+          axiosToken.set(token);
+          this.$store.commit("setUser", user);
+          this.$store.commit("setToken", token);
+
+          this.$notify({
+            type: "success",
+            title: "Success!",
+            text: "You have successfully registered!",
+          });
           form.reset();
         } catch (error) {
           this.$notify({ type: "error", title: "Error!", text: error.message });

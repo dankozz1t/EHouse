@@ -1,9 +1,13 @@
-import axios from "@/utils/axios";
+import { axiosInstance } from "@/utils/http";
 
 export const loginUser = (payload) => {
-  return axios.post("/users/login", payload);
+  return axiosInstance.post("/users/login", payload);
 };
 
 export const registerUser = (payload) => {
-  return axios.post("/users/register", payload);
+  return axiosInstance.post("/users/register", payload);
+};
+
+export const logoutUser = () => {
+  return axiosInstance.post("/users/logout");
 };
