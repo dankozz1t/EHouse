@@ -35,7 +35,12 @@
       :rules="confirmPassword"
       class="registration__input"
     />
-    <MyButton class="registration__btn" type="submit" :loading="loading">
+    <MyButton
+      class="registration__btn"
+      variant="primary"
+      type="submit"
+      :loading="loading"
+    >
       Вход
     </MyButton>
   </MyForm>
@@ -51,7 +56,8 @@ import {
   passwordValidation,
   isRequired,
 } from "@/utils/validationRules";
-// import { mapActions } from "vuex";
+import { registerUser } from "@/services/auth.service";
+
 export default {
   name: "RegistrationForm",
   components: {
@@ -91,39 +97,27 @@ export default {
       return [
         (val) => ({
           hasPassed: val === this.formData.password,
-          message: "Пароли не совпадают",
+          message: "Passwords do not match",
         }),
       ];
     },
   },
-  //   methods: {
-  //     ...mapActions("auth", ["registerUser"]),
-  //     async handleSubmit() {
-  //       const { form } = this.$refs;
-  //       const isFormValid = form.validate();
-  //       const { name, password, email } = this.formData;
-  //       if (isFormValid) {
-  //         try {
-  //           this.loading = true;
-  //           await this.registerUser({
-  //             name,
-  //             password,
-  //             email,
-  //           });
-  //           this.$router.push({ name: "homepage" });
-  //           form.reset();
-  //         } catch (error) {
-  //           this.$notify({
-  //             type: "error",
-  //             title: "Произошла ошибка",
-  //             text: error.message,
-  //           });
-  //         } finally {
-  //           this.loading = false;
-  //         }
-  //       }
-  //     },
-  //   },
+  methods: {
+    async handleSubmit() {
+      const { form } = this.$refs;
+      const isFormValid = form.validate();
+      const { name, password, email } = this.formData;
+      if (isFormValid) {
+        try {
+          const { data } = await registerUser({ name, password, email });
+          console.log(data);
+          form.reset();
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    },
+  },
 };
 </script>
 

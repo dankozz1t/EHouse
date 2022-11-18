@@ -18,7 +18,12 @@
       :rules="passwordRules"
       class="login__input"
     />
-    <MyButton class="login__btn" type="submit" :loading="loading">
+    <MyButton
+      class="login__btn"
+      variant="primary"
+      type="submit"
+      :loading="loading"
+    >
       Вход
     </MyButton>
   </MyForm>
@@ -34,7 +39,7 @@ import {
   passwordValidation,
   isRequired,
 } from "@/utils/validationRules";
-// import { mapActions } from "vuex";
+import { loginUser } from "@/services/auth.service";
 
 export default {
   name: "LoginForm",
@@ -67,29 +72,19 @@ export default {
       return [this.rules.isRequired];
     },
   },
-  //   methods: {
-  //     ...mapActions("auth", ["login"]),
-  //     async handleSubmit() {
-  //       const { form } = this.$refs;
-  //       const isFormValid = form.validate();
-  //       if (isFormValid) {
-  //         try {
-  //           this.loading = true;
-  //           await this.login(this.formData);
-  //           this.$router.push({ name: "homepage" });
-  //           form.reset();
-  //         } catch (error) {
-  //           this.$notify({
-  //             type: "error",
-  //             title: "Произошла ошибка",
-  //             text: error.message,
-  //           });
-  //         } finally {
-  //           this.loading = false;
-  //         }
-  //       }
-  //     },
-  //   },
+  methods: {
+    async handleSubmit() {
+      const isFormValid = this.$refs.form.validate();
+      if (isFormValid) {
+        try {
+          const { data } = await loginUser(this.formData);
+          console.log(data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    },
+  },
 };
 </script>
 
