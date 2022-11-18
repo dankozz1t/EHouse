@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <MyNotification />
+
     <TheHeader />
 
     <router-view />
@@ -11,6 +13,7 @@
 <script>
 import TheHeader from "./components/header/TheHeader.vue";
 import TheFooter from "./components/TheFooter.vue";
+import MyNotification from "@/components/shared/MyNotification.vue";
 
 export default {
   name: "App",
@@ -18,6 +21,7 @@ export default {
   components: {
     TheHeader,
     TheFooter,
+    MyNotification,
   },
 };
 </script>

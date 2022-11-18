@@ -81,7 +81,7 @@ export default {
           const { data } = await loginUser(this.formData);
           console.log(data);
         } catch (error) {
-          console.log(error);
+          this.$notify({ type: "error", title: "Error!", text: error.message });
         } finally {
           this.loading = false;
         }
