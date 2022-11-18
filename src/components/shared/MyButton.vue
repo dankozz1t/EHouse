@@ -4,13 +4,20 @@
     :class="[$style.button, $style[variant]]"
     v-bind="$attrs"
   >
-    <slot></slot>
+    <MyLoader v-if="loading" width="35" height="35" :class="[$style.loader]" />
+    <span :class="{ [$style.hidden]: this.loading }">
+      <slot></slot>
+    </span>
   </button>
 </template>
 
 <script>
+import MyLoader from "@/components/shared/MyLoader";
+
 export default {
   name: "MyButton",
+  components: { MyLoader },
+
   props: {
     type: {
       type: String,
@@ -23,12 +30,14 @@ export default {
       default: "primary",
       required: true,
     },
+    loading: { type: Boolean, default: false },
   },
 };
 </script>
 
 <style lang="scss" module>
 .button {
+  position: relative;
   display: inline-block;
 
   padding: 11px 25px;
@@ -40,6 +49,18 @@ export default {
   border-radius: 7px;
 
   transition: background-color var(--transition-time) var(--transition-cubic);
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .primary {
