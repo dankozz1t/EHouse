@@ -82,6 +82,7 @@ export default {
           this.loading = true;
 
           this.login(this.formData);
+          this.$router.push({ name: "home" });
 
           this.$notify({
             type: "success",

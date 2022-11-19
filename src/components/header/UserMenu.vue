@@ -2,7 +2,7 @@
   <b-col class="header__logout">
     <b-row align-v="center">
       <b-col cols="12" lg="6">
-        <p>Hi {{ $store.state.auth.user.name }}!</p>
+        <p>Hi {{ $store.state.auth.user?.name }}!</p>
       </b-col>
       <b-col cols="12" lg="6">
         <MyButton

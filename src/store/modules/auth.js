@@ -15,7 +15,6 @@ export default {
   state: { ...initialState },
   getters: {
     isLoggedIn(state) {
-      console.log(Boolean(state.token));
       return Boolean(state.token);
     },
   },

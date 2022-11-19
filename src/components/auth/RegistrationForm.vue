@@ -117,6 +117,7 @@ export default {
           this.loading = true;
 
           this.registration({ name, password, email });
+          this.$router.push({ name: "home" });
 
           this.$notify({
             type: "success",
