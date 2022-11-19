@@ -12,7 +12,7 @@
                 <router-link :to="{ name: 'home' }">Home</router-link> |
                 <router-link :to="{ name: 'about' }">About</router-link>
               </b-col>
-              <b-col v-if="!$store.state.token">
+              <b-col v-if="!$store.state.auth.token">
                 <router-link :to="{ name: 'login' }">Login</router-link>
                 |
                 <router-link :to="{ name: 'registration' }">
@@ -22,7 +22,7 @@
               <b-col v-else class="header__logout">
                 <b-row align-v="center">
                   <b-col cols="12" lg="6">
-                    <p>Hi {{ $store.state.user.name }}!</p>
+                    <p>Hi {{ $store.state.auth.user.name }}!</p>
                   </b-col>
                   <b-col cols="12" lg="6">
                     <MyButton
@@ -47,8 +47,7 @@
 <script>
 import TheLogo from "../TheLogo";
 import MyButton from "../shared/MyButton.vue";
-import { logoutUser } from "@/services/auth.service";
-import { axiosToken } from "@/utils/http";
+import { mapActions } from "vuex";
 
 export default {
   name: "TheHeader",
@@ -60,18 +59,18 @@ export default {
     return { loading: false };
   },
   methods: {
+    ...mapActions("auth", ["logout"]),
+
     async handleLogout() {
       try {
         this.loading = true;
-        const { data } = await logoutUser(this.$store.state.token);
 
-        axiosToken.unset();
-        this.$store.commit("setUser", null);
-        this.$store.commit("setToken", null);
+        this.logout();
+
         this.$notify({
           type: "success",
           title: "Success!",
-          text: data.message,
+          text: "Goodbye!",
         });
       } catch (error) {
         this.$notify({ type: "error", title: "Error!", text: error.message });

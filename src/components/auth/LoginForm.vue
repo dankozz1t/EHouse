@@ -33,6 +33,7 @@
 import MyForm from "@/components/shared/MyForm";
 import MyInput from "@/components/shared/MyInput";
 import MyButton from "@/components/shared/MyButton";
+import { mapActions } from "vuex";
 
 import {
   emailValidation,
@@ -72,13 +73,15 @@ export default {
     },
   },
   methods: {
+    ...mapActions("auth", ["login"]),
+
     async handleSubmit() {
       const isFormValid = this.$refs.form.validate();
       if (isFormValid) {
         try {
           this.loading = true;
 
-          this.$store.dispatch("login", this.formData);
+          this.login(this.formData);
 
           this.$notify({
             type: "success",
