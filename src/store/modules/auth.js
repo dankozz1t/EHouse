@@ -1,5 +1,9 @@
-import { loginUser, registerUser, logoutUser } from "@/services/auth.service";
-import { axiosToken } from "@/utils/http";
+import {
+  loginUser,
+  registerUser,
+  logoutUser,
+  currentUser,
+} from "@/services/auth.service";
 
 const initialState = {
   user: null,
@@ -8,14 +12,22 @@ const initialState = {
 
 export default {
   namespaced: true,
-
   state: { ...initialState },
+  getters: {
+    isLoggedIn(state) {
+      console.log(Boolean(state.token));
+      return Boolean(state.token);
+    },
+  },
   mutations: {
     setUser(state, user) {
       state.user = user;
     },
     setToken(state, token) {
       state.token = token;
+    },
+    clearData(state) {
+      Object.assign(state, { ...initialState });
     },
   },
   actions: {
@@ -25,8 +37,6 @@ export default {
 
       commit("setUser", user);
       commit("setToken", token);
-
-      axiosToken.set(token);
     },
 
     async registration({ commit }, payload) {
@@ -35,17 +45,18 @@ export default {
 
       commit("setUser", user);
       commit("setToken", token);
-
-      axiosToken.set(token);
     },
 
     async logout({ commit }) {
       await logoutUser();
 
-      commit("setUser", null);
-      commit("setToken", "");
+      commit("clearData");
+    },
 
-      axiosToken.unset();
+    async currentUser({ commit }) {
+      const { data } = await currentUser();
+
+      commit("setUser", data);
     },
   },
 };

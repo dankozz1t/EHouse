@@ -12,30 +12,9 @@
                 <router-link :to="{ name: 'home' }">Home</router-link> |
                 <router-link :to="{ name: 'about' }">About</router-link>
               </b-col>
-              <b-col v-if="!$store.state.auth.token">
-                <router-link :to="{ name: 'login' }">Login</router-link>
-                |
-                <router-link :to="{ name: 'registration' }">
-                  Registration
-                </router-link>
-              </b-col>
-              <b-col v-else class="header__logout">
-                <b-row align-v="center">
-                  <b-col cols="12" lg="6">
-                    <p>Hi {{ $store.state.auth.user.name }}!</p>
-                  </b-col>
-                  <b-col cols="12" lg="6">
-                    <MyButton
-                      variant="secondary"
-                      size="small"
-                      @click="handleLogout"
-                      :loading="loading"
-                    >
-                      Logout
-                    </MyButton>
-                  </b-col>
-                </b-row>
-              </b-col>
+
+              <UserMenu v-if="isLoggedIn" />
+              <AuthMenu v-else />
             </b-row>
           </nav>
         </b-col>
@@ -46,38 +25,20 @@
 
 <script>
 import TheLogo from "../TheLogo";
-import MyButton from "../shared/MyButton.vue";
-import { mapActions } from "vuex";
+import AuthMenu from "./AuthMenu.vue";
+import UserMenu from "./UserMenu.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "TheHeader",
   components: {
     TheLogo,
-    MyButton,
+    AuthMenu,
+    UserMenu,
   },
-  data() {
-    return { loading: false };
-  },
-  methods: {
-    ...mapActions("auth", ["logout"]),
 
-    async handleLogout() {
-      try {
-        this.loading = true;
-
-        this.logout();
-
-        this.$notify({
-          type: "success",
-          title: "Success!",
-          text: "Goodbye!",
-        });
-      } catch (error) {
-        this.$notify({ type: "error", title: "Error!", text: error.message });
-      } finally {
-        this.loading = false;
-      }
-    },
+  computed: {
+    ...mapGetters("auth", ["isLoggedIn"]),
   },
 };
 </script>

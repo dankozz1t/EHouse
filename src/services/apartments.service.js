@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/utils/http";
+import axiosInstance from "@/utils/http";
 
 export const getApartmentsList = () => {
   return axiosInstance.get("/apartments");

@@ -14,6 +14,7 @@
 import TheHeader from "./components/header/TheHeader.vue";
 import TheFooter from "./components/TheFooter.vue";
 import MyNotification from "@/components/shared/MyNotification.vue";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "App",
@@ -22,6 +23,15 @@ export default {
     TheHeader,
     TheFooter,
     MyNotification,
+  },
+  methods: {
+    ...mapActions("auth", ["currentUser"]),
+  },
+  computed: { ...mapGetters("auth", ["isLoggedIn"]) },
+  async mounted() {
+    if (this.isLoggedIn) {
+      this.currentUser();
+    }
   },
 };
 </script>

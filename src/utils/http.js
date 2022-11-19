@@ -1,15 +1,21 @@
 import axios from "axios";
+import store from "@/store/index.js";
 
 export const axiosInstance = axios.create({
   baseURL: "https://apt-booking-api.herokuapp.com/",
 });
 
-export const axiosToken = {
-  set: (value) => {
-    axiosInstance.defaults.headers.Authorization = `Bearer ${value}`;
-  },
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const { token } = store.state.auth;
 
-  unset: () => {
-    axiosInstance.defaults.headers.Authorization = null;
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
   },
-};
+  (error) => Promise.reject(error)
+);
+
+export default axiosInstance;
