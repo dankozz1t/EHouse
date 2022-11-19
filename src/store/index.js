@@ -1,6 +1,9 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
+import { loginUser, registerUser } from "@/services/auth.service";
+import { axiosToken } from "@/utils/http";
+
 Vue.use(Vuex);
 
 const initialState = {
@@ -19,6 +22,26 @@ export default new Vuex.Store({
       state.token = token;
     },
   },
-  actions: {},
+  actions: {
+    async login({ commit }, payload) {
+      const { data } = await loginUser(payload);
+      const { user, token } = data;
+
+      commit("setUser", user);
+      commit("setToken", token);
+
+      axiosToken.set(token);
+    },
+
+    async registration({ commit }, payload) {
+      const { data } = await registerUser(payload);
+      const { user, token } = data;
+
+      commit("setUser", user);
+      commit("setToken", token);
+
+      axiosToken.set(token);
+    },
+  },
   modules: {},
 });

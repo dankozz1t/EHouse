@@ -41,7 +41,7 @@
       type="submit"
       :loading="loading"
     >
-      Вход
+      Registration
     </MyButton>
   </MyForm>
 </template>
@@ -54,10 +54,9 @@ import MyButton from "@/components/shared/MyButton";
 import {
   emailValidation,
   passwordValidation,
+  nameValidation,
   isRequired,
 } from "@/utils/validationRules";
-import { registerUser } from "@/services/auth.service";
-import { axiosToken } from "@/utils/http";
 
 export default {
   name: "RegistrationForm",
@@ -82,11 +81,12 @@ export default {
       return {
         emailValidation,
         passwordValidation,
+        nameValidation,
         isRequired,
       };
     },
     nameRules() {
-      return [this.rules.isRequired];
+      return [this.rules.isRequired, this.rules.nameValidation];
     },
     emailRules() {
       return [this.rules.isRequired, this.rules.emailValidation];
@@ -106,17 +106,14 @@ export default {
   methods: {
     async handleSubmit() {
       const { form } = this.$refs;
-      const isFormValid = form.validate();
       const { name, password, email } = this.formData;
+
+      const isFormValid = form.validate();
       if (isFormValid) {
         try {
           this.loading = true;
-          const { data } = await registerUser({ name, password, email });
-          const { user, token } = data;
 
-          axiosToken.set(token);
-          this.$store.commit("setUser", user);
-          this.$store.commit("setToken", token);
+          this.$store.dispatch("registration", { name, password, email });
 
           this.$notify({
             type: "success",

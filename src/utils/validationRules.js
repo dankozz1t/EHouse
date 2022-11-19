@@ -13,6 +13,11 @@ export const onlyNumbers = (val) => ({
   message: "Please enter numbers",
 });
 
+export const nameValidation = (val) => ({
+  hasPassed: /^[a-zA-Z]+$/i.test(val),
+  message: "Invalid name. a-z A-Z",
+});
+
 export const emailValidation = (val) => ({
   hasPassed: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(val),
   message: "Invalid email",

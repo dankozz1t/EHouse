@@ -24,7 +24,7 @@
       type="submit"
       :loading="loading"
     >
-      Вход
+      Login
     </MyButton>
   </MyForm>
 </template>
@@ -39,8 +39,6 @@ import {
   passwordValidation,
   isRequired,
 } from "@/utils/validationRules";
-import { loginUser } from "@/services/auth.service";
-import { axiosToken } from "@/utils/http";
 
 export default {
   name: "LoginForm",
@@ -79,17 +77,13 @@ export default {
       if (isFormValid) {
         try {
           this.loading = true;
-          const { data } = await loginUser(this.formData);
-          const { user, token } = data;
 
-          axiosToken.set(token);
-          this.$store.commit("setUser", user);
-          this.$store.commit("setToken", token);
+          this.$store.dispatch("login", this.formData);
 
           this.$notify({
             type: "success",
             title: "Success!",
-            text: `Hello ${this.$store.state.user.name}!`,
+            text: `Welcome!`,
           });
         } catch (error) {
           this.$notify({ type: "error", title: "Error!", text: error.message });
