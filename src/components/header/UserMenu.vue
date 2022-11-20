@@ -40,6 +40,10 @@ export default {
         this.loading = true;
 
         this.logout();
+        const { requiresAuth } = this.$route.meta;
+        if (requiresAuth) {
+          this.$router.push({ name: "home" });
+        }
 
         this.$notify({
           type: "success",
