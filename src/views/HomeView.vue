@@ -7,15 +7,11 @@
       <ApartmentsList v-else :items="filteredApartments">
         <template v-slot:title> <h2>List Apartments</h2> </template>
       </ApartmentsList>
-
-      <MyButton variant="primary">Button primary </MyButton>
-      <MyButton variant="secondary">Button secondary </MyButton>
     </b-container>
   </main>
 </template>
 
 <script>
-import MyButton from "@/components/shared/MyButton.vue";
 import ApartmentsList from "@/components/apartment/ApartmentsList.vue";
 import ApartmentsFilterForm from "@/components/apartment/ApartmentsFilterForm.vue";
 
@@ -28,7 +24,6 @@ export default {
   },
 
   components: {
-    MyButton,
     ApartmentsList,
     ApartmentsFilterForm,
   },

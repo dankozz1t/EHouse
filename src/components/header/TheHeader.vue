@@ -2,10 +2,10 @@
   <header class="header">
     <b-container class="header__container">
       <b-row align-v="center">
-        <b-col cols="12" lg="8" class="text-start">
+        <b-col cols="12" lg="6" class="text-start">
           <router-link :to="{ name: 'home' }"> <TheLogo /> </router-link>
         </b-col>
-        <b-col cols="12" lg="4" class="text-start">
+        <b-col cols="12" lg="6" class="text-start">
           <nav>
             <b-row align-v="center">
               <b-col>

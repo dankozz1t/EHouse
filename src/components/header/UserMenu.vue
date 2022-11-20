@@ -1,10 +1,13 @@
 <template>
   <b-col class="header__logout">
     <b-row align-v="center">
-      <b-col cols="12" lg="6">
+      <b-col cols="12" lg="4">
         <p>Hi {{ $store.state.auth.user?.name }}!</p>
       </b-col>
-      <b-col cols="12" lg="6">
+      <b-col cols="12" lg="4">
+        <router-link :to="{ name: 'orders' }">My orders</router-link>
+      </b-col>
+      <b-col cols="12" lg="4">
         <MyButton
           variant="secondary"
           size="small"

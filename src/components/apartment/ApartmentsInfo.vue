@@ -11,7 +11,13 @@
     />
     <p class="apartment-info__descr">{{ apartment.descr }}</p>
     <div class="apartment-info__btn">
-      <MyButton variant="primary"> Забронировать </MyButton>
+      <MyButton
+        variant="primary"
+        @click="handleApartmentsBooking"
+        :loading="isLoading"
+      >
+        to order
+      </MyButton>
     </div>
   </article>
 </template>
@@ -19,6 +25,8 @@
 <script>
 import Rating from "../StarRating";
 import MyButton from "../shared/MyButton";
+import { mapGetters } from "vuex";
+import { bookApartment } from "@/services/order.service";
 
 export default {
   name: "ApartmentsInfo",
@@ -30,6 +38,37 @@ export default {
     apartment: {
       type: Object,
       required: true,
+    },
+  },
+  data() {
+    return { isLoading: false };
+  },
+  computed: { ...mapGetters("auth", ["isLoggedIn"]) },
+
+  methods: {
+    async handleApartmentsBooking() {
+      if (!this.isLoggedIn) {
+        return this.$notify({
+          type: "error",
+          title: "An error has occurred",
+          text: "Log in to be able to book",
+        });
+      }
+
+      const body = { apartmentId: this.$route.params.id, date: Date.now() };
+      try {
+        this.isLoading = true;
+        await bookApartment(body);
+        this.$notify({ type: "success", title: "Order added" });
+      } catch (error) {
+        this.$notify({
+          type: "error",
+          title: "An error has occurred",
+          text: error.message,
+        });
+      } finally {
+        this.isLoading = false;
+      }
     },
   },
 };

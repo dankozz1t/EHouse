@@ -25,6 +25,16 @@ const routes = [
     component: () => import("../views/ApartmentView.vue"),
   },
   {
+    path: "/orders",
+    name: "orders",
+
+    component: () => import("../views/MyOrdersView.vue"),
+
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: "/login",
     name: "login",
 
